@@ -1,0 +1,108 @@
+# depslib dependency file v1.0
+1511514737 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/main.cpp
+	"Game.hpp"
+	"GameStateStart.hpp"
+
+1511583991 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/Game.hpp
+	<stack>
+	<map>
+	<string>
+	<SFML/Graphics.hpp>
+	"TextureManager.hpp"
+	"Tile.hpp"
+	"Gui.hpp"
+
+1511626996 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/TextureManager.hpp
+	<string>
+	<map>
+	<SFML/Graphics.hpp>
+
+1511583349 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStateStart.hpp
+	<SFML/Graphics.hpp>
+	"GameState.hpp"
+
+1511511542 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameState.hpp
+	"Game.hpp"
+
+1511595687 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/AnimationHandler.cpp
+	"AnimationHandler.hpp"
+
+1511520148 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/AnimationHandler.hpp
+	<SFML/Graphics.hpp>
+	<vector>
+
+1511583984 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Game.cpp
+	<stack>
+	<SFML/Graphics.hpp>
+	<SFML/System.hpp>
+	"Game.hpp"
+	"GameState.hpp"
+
+1511518936 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameState.cpp
+	"GameState.hpp"
+
+1511625181 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateEditor.cpp
+	<map>
+	<string>
+	"GameStateEditor.hpp"
+	"Gui.hpp"
+
+1511592023 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStateEditor.hpp
+	<SFML/Graphics.hpp>
+	"GameState.hpp"
+	"GameStateEditor.hpp"
+	"Map.hpp"
+	"City.hpp"
+
+1511584507 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateStart.cpp
+	<utility>
+	"GameStateStart.hpp"
+	"GameStateEditor.hpp"
+
+1511519376 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/TextureManager.cpp
+	"TextureManager.hpp"
+
+1511585439 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/Tile.hpp
+	<vector>
+	<SFML/Graphics.hpp>
+	"AnimationHandler.hpp"
+
+1511606697 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Tile.cpp
+	"Tile.hpp"
+
+1511585445 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/Map.hpp
+	<string>
+	<map>
+	<vector>
+	<SFML/Graphics.hpp>
+	"Tile.hpp"
+
+1511595993 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Map.cpp
+	"Map.hpp"
+	"Tile.hpp"
+	<fstream>
+	<iostream>
+
+1511582604 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/Gui.hpp
+	<vector>
+	<utility>
+	<string>
+	<SFML/Graphics.hpp>
+
+1511585389 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Gui.cpp
+	"Gui.hpp"
+
+1511607365 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/City.cpp
+	<cmath>
+	<cstdio>
+	<iostream>
+	<algorithm>
+	<vector>
+	<fstream>
+	<sstream>
+	"City.hpp"
+	"Tile.hpp"
+
+1511591568 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/City.hpp
+	"Map.hpp"
+
