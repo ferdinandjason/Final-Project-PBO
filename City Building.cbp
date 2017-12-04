@@ -45,6 +45,7 @@
 		</Linker>
 		<Unit filename="include/AnimationHandler.hpp" />
 		<Unit filename="include/City.hpp" />
+		<Unit filename="include/FPS.hpp" />
 		<Unit filename="include/Game.hpp" />
 		<Unit filename="include/GameState.hpp" />
 		<Unit filename="include/GameStateEditor.hpp" />
@@ -56,6 +57,7 @@
 		<Unit filename="main.cpp" />
 		<Unit filename="src/AnimationHandler.cpp" />
 		<Unit filename="src/City.cpp" />
+		<Unit filename="src/FPS.cpp" />
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GameState.cpp" />
 		<Unit filename="src/GameStateEditor.cpp" />

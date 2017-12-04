@@ -33,13 +33,14 @@ GameStateEditor::GameStateEditor(Game* game)
     this->guiSystem.emplace("selectionCostText", Gui(sf::Vector2f(196, 16), 0, false, this->game->styleSheets.at("text"),
         { std::make_pair("", "") }));
 
-    this->guiSystem.emplace("infoBar", Gui(sf::Vector2f(this->game->window.getSize().x / 5 , 16), 2, true, this->game->styleSheets.at("button"),
+    this->guiSystem.emplace("infoBar", Gui(sf::Vector2f(this->game->window.getSize().x / 6 , 16), 2, true, this->game->styleSheets.at("button"),
         {
             std::make_pair("time",          "time"),
             std::make_pair("funds",         "funds"),
             std::make_pair("population",    "population"),
             std::make_pair("employment",    "employment"),
-            std::make_pair("current tile",  "tile")
+            std::make_pair("current tile",  "tile"),
+            std::make_pair("FPS",           "FPS")
         }));
     this->guiSystem.at("infoBar").setPosition(sf::Vector2f(0, this->game->window.getSize().y - 16));
     this->guiSystem.at("infoBar").show();
@@ -123,11 +124,12 @@ void GameStateEditor::update(const float dt)
     this->city.update(dt);
 
     /* Update the info bar at the bottom of the screen */
-    this->guiSystem.at("infoBar").setEntryText(0, "Day: " + std::to_string(this->city.day));
-    this->guiSystem.at("infoBar").setEntryText(1, "$" + std::to_string(long(this->city.funds)));
-    this->guiSystem.at("infoBar").setEntryText(2, std::to_string(long(this->city.population)) + " (" + std::to_string(long(this->city.getHomeless())) + ")");
-    this->guiSystem.at("infoBar").setEntryText(3, std::to_string(long(this->city.employable)) + " (" + std::to_string(long(this->city.getUnemployed())) + ")");
-    this->guiSystem.at("infoBar").setEntryText(4, tileTypeToStr(currentTile->tileType));
+    this->guiSystem.at("infoBar").setEntryText(0, " Day: " + std::to_string(this->city.day));
+    this->guiSystem.at("infoBar").setEntryText(1, " $" + std::to_string(long(this->city.funds)));
+    this->guiSystem.at("infoBar").setEntryText(2, " "+std::to_string(long(this->city.population)) + " (" + std::to_string(long(this->city.getHomeless())) + ")");
+    this->guiSystem.at("infoBar").setEntryText(3, " "+std::to_string(long(this->city.employable)) + " (" + std::to_string(long(this->city.getUnemployed())) + ")");
+    this->guiSystem.at("infoBar").setEntryText(4, " "+tileTypeToStr(currentTile->tileType));
+    this->guiSystem.at("infoBar").setEntryText(5, " FPS : "+std::to_string(frame.getFPS(dt)));
 
     /* Highlight entries of the right click context menu */
     this->guiSystem.at("rightClickMenu").highlight(this->guiSystem.at("rightClickMenu").getEntry(this->game->window.mapPixelToCoords(sf::Mouse::getPosition(this->game->window), this->guiView)));

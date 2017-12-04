@@ -350,16 +350,11 @@ double City::distributePool(double& pool, Tile& tile, double rate=0.0)
     const static int moveRate = 4;
     unsigned int maxPop = tile.maxPopPerLevel*(tile.tileVariant+1);
     /* If there is room in the zone,move up to 4 people from the pool into the zone */
-    if(tile.tileType == TileType::INDUSTRIAL)
-    {
-        printf("~~~ %d\n",this->populationPool);
-    }
     if(pool>0)
     {
         int moving = maxPop-tile.population;
-        if(moving>moveRate) {moving=moveRate;printf("~~ a %d\n",moving);}
-        if(pool - moving<0) {moving=pool;printf("~~ b %d\n",moving);}
-        if(tile.tileType == TileType::INDUSTRIAL) printf("%d %d %lf\n",moving,moveRate,pool);
+        if(moving>moveRate) {moving=moveRate;}
+        if(pool - moving<0) {moving=pool;}
         pool-=moving;
         tile.population+=moving;
     }

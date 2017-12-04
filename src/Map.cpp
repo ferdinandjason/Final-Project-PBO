@@ -265,7 +265,7 @@ void Map::updateDirection(TileType tileType)
  * algorithm, such as A*. That doesn't fix our problem though, we've still got far
  * too many pairs of zones to check, especially in a large city.
  *
- * nstead what we do is split the Map into regions (using the regions array from
+ * Instead what we do is split the Map into regions (using the regions array from
  * before). Each Tile will be labelled depending on what region it is in, where two
  * Tiles are in the same region if there is a path (through zones or roads) between
  * them. If we find all of those paths, we can just check which region each Tile is

@@ -12,7 +12,6 @@ GameStateStart::GameStateStart(Game* game)
     pos*=0.5f;
     this->view.setCenter(pos);
 
-
     /*
      * This Gui will act as a main menu for the game. To add new elements
      * to every othe std::map we've used the [] syntax, but we can't do

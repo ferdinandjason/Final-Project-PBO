@@ -31,7 +31,7 @@
 	<SFML/Graphics.hpp>
 	<vector>
 
-1511583984 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Game.cpp
+1512294133 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Game.cpp
 	<stack>
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
@@ -41,20 +41,21 @@
 1511518936 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameState.cpp
 	"GameState.hpp"
 
-1511625181 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateEditor.cpp
+1512293992 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateEditor.cpp
 	<map>
 	<string>
 	"GameStateEditor.hpp"
 	"Gui.hpp"
 
-1511592023 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStateEditor.hpp
+1512293794 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStateEditor.hpp
 	<SFML/Graphics.hpp>
 	"GameState.hpp"
 	"GameStateEditor.hpp"
 	"Map.hpp"
 	"City.hpp"
+	"FPS.hpp"
 
-1511584507 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateStart.cpp
+1512280978 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateStart.cpp
 	<utility>
 	"GameStateStart.hpp"
 	"GameStateEditor.hpp"
@@ -67,7 +68,7 @@
 	<SFML/Graphics.hpp>
 	"AnimationHandler.hpp"
 
-1511606697 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Tile.cpp
+1512124069 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Tile.cpp
 	"Tile.hpp"
 
 1511585445 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/Map.hpp
@@ -77,7 +78,7 @@
 	<SFML/Graphics.hpp>
 	"Tile.hpp"
 
-1511595993 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Map.cpp
+1512123671 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Map.cpp
 	"Map.hpp"
 	"Tile.hpp"
 	<fstream>
@@ -92,7 +93,7 @@
 1511585389 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Gui.cpp
 	"Gui.hpp"
 
-1511607365 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/City.cpp
+1512123710 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/City.cpp
 	<cmath>
 	<cstdio>
 	<iostream>
@@ -105,4 +106,10 @@
 
 1511591568 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/City.hpp
 	"Map.hpp"
+
+1512293911 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/FPS.cpp
+	"FPS.hpp"
+
+1512293872 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/FPS.hpp
+	"Game.hpp"
 

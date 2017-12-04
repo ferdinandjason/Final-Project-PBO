@@ -7,6 +7,7 @@
 #include "GameStateEditor.hpp"
 #include "Map.hpp"
 #include "City.hpp"
+#include "FPS.hpp"
 
 /*
  * GameStateEditor class: (Game Class)
@@ -64,6 +65,7 @@ class GameStateEditor : public GameState
         std::map<std::string, Gui> guiSystem;
 
         Tile* currentTile;
+        FPS frame;
 
 };
 

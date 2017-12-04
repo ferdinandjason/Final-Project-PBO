@@ -44,11 +44,7 @@ void Tile::draw(sf::RenderWindow& window, float dt)
 {
     this->animHandler.changeAnimation(this->tileVariant);
     this->animHandler.update(dt);
-    if(this->tileType == TileType::INDUSTRIAL)
-    {
-        printf("%d v ",this->tileVariant);
-        printf("%lf  . %d . %d\n",this->population,this->maxPopPerLevel,this->maxPopPerLevel*(this->tileVariant+1));
-    }
+
     this->sprite.setTextureRect(this->animHandler.bounds);
     window.draw(this->sprite);
 

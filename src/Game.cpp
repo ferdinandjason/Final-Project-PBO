@@ -149,5 +149,3 @@ void Game::loadFonts()
     this->fonts["main_font"] = font;
     return;
 }
-
-
