@@ -1,8 +1,8 @@
 width=64
 height=64
 day=0
-populationPool=50
-employmentPool=25
+populationPool=1000
+employmentPool=500
 population=50
 employable=25
 birthRate=0.00055

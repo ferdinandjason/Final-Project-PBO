@@ -2,7 +2,13 @@
 #include <string>
 
 #include "GameStateEditor.hpp"
+#include "GameStatePause.hpp"
 #include "Gui.hpp"
+
+GameStateEditor::GameStateEditor()
+{
+
+}
 
 GameStateEditor::GameStateEditor(Game* game)
 {
@@ -15,6 +21,7 @@ GameStateEditor::GameStateEditor(Game* game)
     pos.y*=0.5;
     this->guiView.setCenter(pos);
     this->gameView.setCenter(pos);
+    this->gameStates=State::PLAY;
 
     this->city = City("city", this->game->tileSize, this->game->tileAtlas);
     this->city.shuffleTiles();
@@ -47,7 +54,7 @@ GameStateEditor::GameStateEditor(Game* game)
 
     this->zoomLevel = 1.0f;
 
-    /* Centre the caera on the map */
+    /* Centre the camera on the map */
     sf::Vector2f centre(this->city.map.width,this->city.map.height*0.5);
     centre*=float(this->city.map.tileSize);
     gameView.setCenter(centre);
@@ -172,6 +179,7 @@ void GameStateEditor::handleinput()
             case sf::Event::KeyPressed:
             {
                 if(event.key.code == sf::Keyboard::Escape) this->game->window.close();
+                else if(event.key.code == sf::Keyboard::Space) this->game->pushState(new GameStatePause(this->game,this));
                 break;
             }
 
@@ -189,7 +197,7 @@ void GameStateEditor::handleinput()
                     sf::Vector2f pos = this->game->window.mapPixelToCoords(sf::Mouse::getPosition(this->game->window), this->gameView);
                     selectionEnd.x = pos.y/(this->city.map.tileSize) + pos.x/(2*this->city.map.tileSize) - this->city.map.width *0.5-0.5;
                     selectionEnd.y = pos.y/(this->city.map.tileSize) - pos.x/(2*this->city.map.tileSize) + this->city.map.width *0.5+0.5;
-                    printf("%d %d , %.0lf %.0lf\n",selectionEnd.x,selectionEnd.y,pos.x,pos.y);
+                    //printfprintf("%d %d , %.0lf %.0lf\n",selectionEnd.x,selectionEnd.y,pos.x,pos.y);
 
 
                     this->city.map.clearSelected();

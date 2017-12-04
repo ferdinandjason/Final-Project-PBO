@@ -30,7 +30,6 @@
  * guiSystem -> class to create Gui System in Game Start
  */
 
-
 class GameStateStart : public GameState
 {
     public:

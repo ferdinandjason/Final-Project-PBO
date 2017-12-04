@@ -39,6 +39,7 @@
 class GameStateEditor : public GameState
 {
     public:
+        GameStateEditor();
         GameStateEditor(Game* game);
         ~GameStateEditor();
 

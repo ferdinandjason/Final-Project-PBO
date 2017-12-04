@@ -3,7 +3,7 @@
 	"Game.hpp"
 	"GameStateStart.hpp"
 
-1511583991 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/Game.hpp
+1512389808 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/Game.hpp
 	<stack>
 	<map>
 	<string>
@@ -17,11 +17,11 @@
 	<map>
 	<SFML/Graphics.hpp>
 
-1511583349 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStateStart.hpp
+1512389791 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStateStart.hpp
 	<SFML/Graphics.hpp>
 	"GameState.hpp"
 
-1511511542 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameState.hpp
+1512378982 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameState.hpp
 	"Game.hpp"
 
 1511595687 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/AnimationHandler.cpp
@@ -31,7 +31,7 @@
 	<SFML/Graphics.hpp>
 	<vector>
 
-1512294133 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Game.cpp
+1512389830 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Game.cpp
 	<stack>
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
@@ -41,13 +41,14 @@
 1511518936 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameState.cpp
 	"GameState.hpp"
 
-1512293992 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateEditor.cpp
+1512383931 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateEditor.cpp
 	<map>
 	<string>
 	"GameStateEditor.hpp"
+	"GameStatePause.hpp"
 	"Gui.hpp"
 
-1512293794 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStateEditor.hpp
+1512383945 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStateEditor.hpp
 	<SFML/Graphics.hpp>
 	"GameState.hpp"
 	"GameStateEditor.hpp"
@@ -55,7 +56,7 @@
 	"City.hpp"
 	"FPS.hpp"
 
-1512280978 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateStart.cpp
+1512392087 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateStart.cpp
 	<utility>
 	"GameStateStart.hpp"
 	"GameStateEditor.hpp"
@@ -90,10 +91,10 @@
 	<string>
 	<SFML/Graphics.hpp>
 
-1511585389 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Gui.cpp
+1512387182 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Gui.cpp
 	"Gui.hpp"
 
-1512123710 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/City.cpp
+1512349633 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/City.cpp
 	<cmath>
 	<cstdio>
 	<iostream>
@@ -112,4 +113,11 @@
 
 1512293872 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/FPS.hpp
 	"Game.hpp"
+
+1512383961 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStatePause.hpp
+	<GameState.hpp>
+	"GameStateEditor.hpp"
+
+1512388814 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStatePause.cpp
+	"GameStatePause.hpp"
 

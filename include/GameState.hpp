@@ -11,8 +11,10 @@
  *
  * The compiler wouldn't allow you to create an instance of this class
  *
- * Our game will use two states, GameStateStart and GameStateEditor
+ * Our game will use three states, GameStateStart, GameStateEditor and GameStatePaused
  */
+
+ enum class State {START,PLAY,PAUSE};
 
 class GameState
 {
@@ -22,6 +24,8 @@ class GameState
         virtual void draw(const float dt) = 0;
         virtual void update(const float dt) = 0;
         virtual void handleinput() = 0;
+
+        State gameStates;
 
     protected:
 

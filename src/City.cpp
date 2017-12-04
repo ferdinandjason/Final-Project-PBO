@@ -246,7 +246,7 @@ void City::update(float dt)
     /* Adjust population pool for births and deaths. */
     this->populationPool += this->populationPool * (this->birthRate - this->deathRate);
     popTotal += this->populationPool;
-    printf("%!!!%lf\n",populationPool);
+    //printf("%!!!%lf\n",populationPool);
 
     /* Adjust the employment pool for the changing population. */
     float newWorkers = (popTotal - this->population) * this->propCanWork;
@@ -358,6 +358,9 @@ double City::distributePool(double& pool, Tile& tile, double rate=0.0)
         pool-=moving;
         tile.population+=moving;
     }
+    if(tile.tileType==TileType::RESIDENTIAL)printf("a %lf\n",tile.population);
+    if(tile.tileType==TileType::COMMERCIAL)printf("b %lf\n",tile.population);
+    if(tile.tileType==TileType::INDUSTRIAL)printf("c %lf\n",tile.population);
     /* Adjust the tile population for birth and deaths */
     tile.population+=tile.population*rate;
 

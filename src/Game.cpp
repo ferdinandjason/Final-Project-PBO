@@ -18,6 +18,7 @@ Game::Game()
     this->window.setFramerateLimit(60);
 
     this->background.setTexture(this->texmgr.getRef("background"));
+    this->logos.setTexture(this->texmgr.getRef("logos"));
 }
 
 Game::~Game()
@@ -35,7 +36,7 @@ void Game::pushState(GameState* state)
 
 void Game::popState()
 {
-    delete this->states.top();
+    if(this->states.top()->gameStates!=State::PAUSE) delete this->states.top();
     this->states.pop();
 
     return;
@@ -85,6 +86,7 @@ void Game::loadTextures()
     texmgr.loadTexture("road",          "media/road.png");
 
     texmgr.loadTexture("background",    "media/background.png");
+    texmgr.loadTexture("logos",         "media/logos.png");
 }
 
 
@@ -135,9 +137,18 @@ void Game::loadSytleSheets()
     this->styleSheets["button"]=GuiStyle(&this->fonts.at("main_font"),1,
         sf::Color(0xc6,0xc6,0xc6),sf::Color(0x94,0x94,0x94), sf::Color(0x00,0x00,0x00),
         sf::Color(0x61,0x61,0x61),sf::Color(0x94,0x94,0x94), sf::Color(0x00,0x00,0x00));
+    this->styleSheets["button2"]=GuiStyle(&this->fonts.at("pixel_font"),1,
+        sf::Color(0xc6,0xc6,0xc6),sf::Color(0x94,0x94,0x94), sf::Color(0x00,0x00,0x00),
+        sf::Color(0x61,0x61,0x61),sf::Color(0x94,0x94,0x94), sf::Color(0x00,0x00,0x00));
     this->styleSheets["text"] = GuiStyle(&this->fonts.at("main_font"), 0,
         sf::Color(0x00,0x00,0x00,0x00), sf::Color(0x00,0x00,0x00), sf::Color(0xff,0xff,0xff),
         sf::Color(0x00,0x00,0x00,0x00), sf::Color(0x00,0x00,0x00), sf::Color(0xff,0x00,0x00));
+    this->styleSheets["text2"] = GuiStyle(&this->fonts.at("pixel_font"), 0,
+        sf::Color(0x00,0x00,0x00,0x00), sf::Color(0x00,0x00,0x00), sf::Color(0xff,0xff,0xff),
+        sf::Color(0x00,0x00,0x00,0x00), sf::Color(0x00,0x00,0x00), sf::Color(0xff,0x00,0x00));
+    this->styleSheets["layer"] = GuiStyle(&this->fonts.at("pixel_font"),0,
+        sf::Color(0x69,0x69,0x69,0x99),sf::Color(0x69,0x69,0x69,0x99),sf::Color(0x69,0x69,0x69,0x99),
+        sf::Color(0x69,0x69,0x69,0x99),sf::Color(0x69,0x69,0x69,0x99),sf::Color(0x69,0x69,0x69,0x99));
 
         return;
 }
@@ -147,5 +158,8 @@ void Game::loadFonts()
     sf::Font font;
     font.loadFromFile("media/font.ttf");
     this->fonts["main_font"] = font;
+    sf::Font font2;
+    font2.loadFromFile("media/pixel.ttf");
+    this->fonts["pixel_font"] = font2;
     return;
 }

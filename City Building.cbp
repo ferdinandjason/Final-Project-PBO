@@ -49,6 +49,7 @@
 		<Unit filename="include/Game.hpp" />
 		<Unit filename="include/GameState.hpp" />
 		<Unit filename="include/GameStateEditor.hpp" />
+		<Unit filename="include/GameStatePause.hpp" />
 		<Unit filename="include/GameStateStart.hpp" />
 		<Unit filename="include/Gui.hpp" />
 		<Unit filename="include/Map.hpp" />
@@ -61,6 +62,7 @@
 		<Unit filename="src/Game.cpp" />
 		<Unit filename="src/GameState.cpp" />
 		<Unit filename="src/GameStateEditor.cpp" />
+		<Unit filename="src/GameStatePause.cpp" />
 		<Unit filename="src/GameStateStart.cpp" />
 		<Unit filename="src/Gui.cpp" />
 		<Unit filename="src/Map.cpp" />
