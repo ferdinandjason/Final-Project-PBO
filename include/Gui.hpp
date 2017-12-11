@@ -126,7 +126,7 @@ class Gui : public sf::Transformable,public sf::Drawable
         virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
         void show();
         void hide();
-        void highlight(const int entry);
+        int highlight(const int entry);
         std::string activate(const int entry);
         std::string activate(const sf::Vector2f mousePos);
 

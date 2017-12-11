@@ -62,6 +62,8 @@ class Game
 
         void run();
 
+        int Accelerator=1;
+
     protected:
 
     private:

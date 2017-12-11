@@ -105,8 +105,9 @@ void Gui::hide()
  * activate combines the first activate and getEntry together into a more handy function.
  */
 
-void Gui::highlight(const int entry)
+int Gui::highlight(const int entry)
 {
+    bool selected=false;
     for(int i = 0; i < entries.size(); ++i)
     {
         if(i == entry)
@@ -114,6 +115,7 @@ void Gui::highlight(const int entry)
             entries[i].shape.setFillColor(style.bodyHighlightCol);
             entries[i].shape.setOutlineColor(style.borderHighlightCol);
             entries[i].text.setColor(style.textHighlightCol);
+            selected=true;
         }
         else
         {
@@ -122,8 +124,7 @@ void Gui::highlight(const int entry)
             entries[i].text.setColor(style.textCol);
         }
     }
-
-    return;
+    return selected;
 }
 
 /* Return the message bound to the entry. */

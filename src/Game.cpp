@@ -64,7 +64,7 @@ void Game::run()
     {
         sf::Time elapsed=clock.restart();
         float dt=elapsed.asSeconds();
-
+        dt*=Accelerator;
         if(peekState()==nullptr) continue;
         peekState()->handleinput();
         peekState()->update(dt);
@@ -134,10 +134,10 @@ void Game::loadTiles()
 
 void Game::loadSytleSheets()
 {
-    this->styleSheets["button"]=GuiStyle(&this->fonts.at("main_font"),1,
+    this->styleSheets["button"] = GuiStyle(&this->fonts.at("main_font"),1,
         sf::Color(0xc6,0xc6,0xc6),sf::Color(0x94,0x94,0x94), sf::Color(0x00,0x00,0x00),
         sf::Color(0x61,0x61,0x61),sf::Color(0x94,0x94,0x94), sf::Color(0x00,0x00,0x00));
-    this->styleSheets["button2"]=GuiStyle(&this->fonts.at("pixel_font"),1,
+    this->styleSheets["button2"] = GuiStyle(&this->fonts.at("pixel_font"),1,
         sf::Color(0xc6,0xc6,0xc6),sf::Color(0x94,0x94,0x94), sf::Color(0x00,0x00,0x00),
         sf::Color(0x61,0x61,0x61),sf::Color(0x94,0x94,0x94), sf::Color(0x00,0x00,0x00));
     this->styleSheets["text"] = GuiStyle(&this->fonts.at("main_font"), 0,
@@ -149,6 +149,9 @@ void Game::loadSytleSheets()
     this->styleSheets["layer"] = GuiStyle(&this->fonts.at("pixel_font"),0,
         sf::Color(0x69,0x69,0x69,0x99),sf::Color(0x69,0x69,0x69,0x99),sf::Color(0x69,0x69,0x69,0x99),
         sf::Color(0x69,0x69,0x69,0x99),sf::Color(0x69,0x69,0x69,0x99),sf::Color(0x69,0x69,0x69,0x99));
+    this->styleSheets["status"] = GuiStyle(&this->fonts.at("main_font"),0,
+        sf::Color(0x00,0x00,0x00,0x99),sf::Color(0x00,0x00,0x00,0x99),sf::Color(0xff,0xff,0xff,0x99),
+        sf::Color(0x00,0x00,0x00,0x99),sf::Color(0x00,0x00,0x00,0x99),sf::Color(0x00,0x00,0x00,0x99));
 
         return;
 }

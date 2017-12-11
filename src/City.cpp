@@ -358,9 +358,11 @@ double City::distributePool(double& pool, Tile& tile, double rate=0.0)
         pool-=moving;
         tile.population+=moving;
     }
+    /*
     if(tile.tileType==TileType::RESIDENTIAL)printf("a %lf\n",tile.population);
     if(tile.tileType==TileType::COMMERCIAL)printf("b %lf\n",tile.population);
     if(tile.tileType==TileType::INDUSTRIAL)printf("c %lf\n",tile.population);
+    */
     /* Adjust the tile population for birth and deaths */
     tile.population+=tile.population*rate;
 

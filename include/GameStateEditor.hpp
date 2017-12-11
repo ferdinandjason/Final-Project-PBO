@@ -68,6 +68,8 @@ class GameStateEditor : public GameState
         Tile* currentTile;
         FPS frame;
 
+        int satu=1,dua=0,tiga=0;
+        bool mul1=true,mul2=false,mul3=false;
 };
 
 #endif // GAMESTATEEDITOR_HPP

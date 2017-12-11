@@ -10,7 +10,6 @@ GameStatePause::GameStatePause(Game *game,GameStateEditor *games)
     pos*=0.5f;
     this->view.setCenter(pos);
     this->gameStates=State::PAUSE;
-    //pos*=2.0f;
     pos*=2.0f;
     this->guiSystem.emplace("layer",Gui(pos,0,false,this->game->styleSheets.at("layer"),
         {std::make_pair("","")}));
@@ -28,7 +27,6 @@ GameStatePause::GameStatePause(Game *game,GameStateEditor *games)
     pos.y+=90;
     this->guiSystem.emplace("pausedMsg",Gui(sf::Vector2f(556,30),0,false,this->game->styleSheets.at("text2"),
         {std::make_pair("PRESS SPACE TO CONTINUE","pause_msg")}));
-    //pos*=0.5f;
     this->guiSystem.at("pausedMsg").setOrigin(sf::Vector2f(278,15));
     this->guiSystem.at("pausedMsg").setPosition(pos);
     this->guiSystem.at("pausedMsg").show();
@@ -87,7 +85,7 @@ void GameStatePause::handleinput()
             case sf::Event::KeyPressed:
             {
                 if(event.key.code == sf::Keyboard::Escape) this->game->window.close();
-                else if(event.key.code == sf::Keyboard::Space) this->game->popState();
+                else if(event.key.code == sf::Keyboard::Space) this->backToGame();
                 break;
             }
             default: break;
@@ -99,5 +97,5 @@ void GameStatePause::handleinput()
 
 void GameStatePause::backToGame()
 {
-
+    this->game->popState();
 }

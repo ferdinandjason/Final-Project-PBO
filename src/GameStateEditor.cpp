@@ -1,9 +1,12 @@
 #include <map>
 #include <string>
+#include <iostream>
+#include <cmath>
 
 #include "GameStateEditor.hpp"
 #include "GameStatePause.hpp"
 #include "Gui.hpp"
+#include "Tile.hpp"
 
 GameStateEditor::GameStateEditor()
 {
@@ -51,6 +54,29 @@ GameStateEditor::GameStateEditor(Game* game)
         }));
     this->guiSystem.at("infoBar").setPosition(sf::Vector2f(0, this->game->window.getSize().y - 16));
     this->guiSystem.at("infoBar").show();
+
+    this->guiSystem.emplace("mult1", Gui(sf::Vector2f(48,48),10,false,this->game->styleSheets.at("button"),
+        {   std::make_pair("1X","One") }));
+    this->guiSystem.at("mult1").setPosition(sf::Vector2f(this->game->window.getSize().x-150,2));
+    this->guiSystem.at("mult1").show();
+    this->guiSystem.emplace("mult2", Gui(sf::Vector2f(48,48),10,false,this->game->styleSheets.at("button"),
+        {   std::make_pair("2X","Two") }));
+    this->guiSystem.at("mult2").setPosition(sf::Vector2f(this->game->window.getSize().x-100,2));
+    this->guiSystem.at("mult2").show();
+    this->guiSystem.emplace("mult4", Gui(sf::Vector2f(48,48),10,false,this->game->styleSheets.at("button"),
+        {   std::make_pair("4X","Four") }));
+    this->guiSystem.at("mult4").setPosition(sf::Vector2f(this->game->window.getSize().x-50,2));
+    this->guiSystem.at("mult4").show();
+
+    this->guiSystem.emplace("STATUS", Gui(sf::Vector2f(196,16),2,false,this->game->styleSheets.at("status"),
+        {
+            std::make_pair("tileType","tileType"),
+            std::make_pair("tileVariant","tileVariant"),
+            std::make_pair("regions","regions"),
+            std::make_pair("population","population"),
+            std::make_pair("storedGoods","storedGoods"),
+            std::make_pair("productions","productions")
+        }));
 
     this->zoomLevel = 1.0f;
 
@@ -141,6 +167,10 @@ void GameStateEditor::update(const float dt)
     /* Highlight entries of the right click context menu */
     this->guiSystem.at("rightClickMenu").highlight(this->guiSystem.at("rightClickMenu").getEntry(this->game->window.mapPixelToCoords(sf::Mouse::getPosition(this->game->window), this->guiView)));
 
+    if(mul1==true){this->guiSystem.at("mult1").highlight(0);this->game->Accelerator=1;}
+    if(mul2==true){this->guiSystem.at("mult2").highlight(0);this->game->Accelerator=2;}
+    if(mul3==true){this->guiSystem.at("mult4").highlight(0);this->game->Accelerator=4;}
+
     return;
 }
 
@@ -174,6 +204,16 @@ void GameStateEditor::handleinput()
                 this->game->background.setScale(
                     float(event.size.width)/float(this->game->background.getTexture()->getSize().x),
                     float(event.size.height)/float(this->game->background.getTexture()->getSize().y));
+                /* Resizing Accelerator Button */
+                this->guiSystem.at("mult1").setDimensions(sf::Vector2f(48,48));
+                this->guiSystem.at("mult1").setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(event.size.width-150,2),this->guiView));
+                this->guiSystem.at("mult1").show();
+                this->guiSystem.at("mult2").setDimensions(sf::Vector2f(48,48));
+                this->guiSystem.at("mult2").setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(event.size.width-100,2),this->guiView));
+                this->guiSystem.at("mult2").show();
+                this->guiSystem.at("mult4").setDimensions(sf::Vector2f(48,48));
+                this->guiSystem.at("mult4").setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(event.size.width-50,2),this->guiView));
+                this->guiSystem.at("mult4").show();
                 break;
             }
             case sf::Event::KeyPressed:
@@ -185,6 +225,15 @@ void GameStateEditor::handleinput()
 
             case sf::Event::MouseMoved:
             {
+                sf::Vector2f posMouse = this->game->window.mapPixelToCoords(sf::Mouse::getPosition(this->game->window), this->gameView);
+                sf::Vector2f Now;
+                Now.x = floor(posMouse.y / (this->city.map.tileSize) + posMouse.x / (2*this->city.map.tileSize) - this->city.map.width * 0.5 - 0.5);
+                Now.y = floor(posMouse.y / (this->city.map.tileSize) - posMouse.x / (2*this->city.map.tileSize) + this->city.map.width * 0.5 + 0.5);
+
+                int positionTile = Now.y*this->city.map.width+Now.x;
+                if(positionTile >= (this->city.map.width * this->city.map.height)) positionTile=0;
+                Tile now = this->city.map.tiles[positionTile];
+
                 /* Pan the camera */
                 if(this->actionState == ActionState::PANNING)
                 {
@@ -198,7 +247,6 @@ void GameStateEditor::handleinput()
                     selectionEnd.x = pos.y/(this->city.map.tileSize) + pos.x/(2*this->city.map.tileSize) - this->city.map.width *0.5-0.5;
                     selectionEnd.y = pos.y/(this->city.map.tileSize) - pos.x/(2*this->city.map.tileSize) + this->city.map.width *0.5+0.5;
                     //printfprintf("%d %d , %.0lf %.0lf\n",selectionEnd.x,selectionEnd.y,pos.x,pos.y);
-
 
                     this->city.map.clearSelected();
                     if(this->currentTile->tileType == TileType::GRASS)
@@ -223,11 +271,42 @@ void GameStateEditor::handleinput()
                         this->guiSystem.at("selectionCostText").highlight(-1);
                     this->guiSystem.at("selectionCostText").setPosition(guiPos + sf::Vector2f(16, -16));
                     this->guiSystem.at("selectionCostText").show();
-                    }
-                    /* Highlight entries of the right click context menu */
-                    this->guiSystem.at("rightClickMenu").highlight(this->guiSystem.at("rightClickMenu").getEntry(guiPos));
                 }
-                break;
+                else if(actionState == ActionState::NONE && now.tileType!=TileType::WATER && now.tileType!=TileType::ROAD && now.tileType!=TileType::FOREST && now.tileType!=TileType::FOREST && now.tileType!=TileType::VOID && now.tileType!=TileType::GRASS)
+                {
+                    sf::Vector2f pos = guiPos;
+                    if(pos.x > this->game->window.getSize().x - this->guiSystem.at("STATUS").getSize().x)
+                    {
+                        pos -= sf::Vector2f(this->guiSystem.at("STATUS").getSize().x, 0);
+                    }
+                    if(pos.y > this->game->window.getSize().y - this->guiSystem.at("STATUS").getSize().y)
+                    {
+                        pos -= sf::Vector2f(0, this->guiSystem.at("STATUS").getSize().y);
+                    }
+
+                    this->guiSystem.at("STATUS").setEntryText(0,tileTypeToStr(now.tileType));
+                    this->guiSystem.at("STATUS").setEntryText(1,"Level : "+std::to_string(now.tileVariant)+"/"+std::to_string(now.maxLevels));
+                    this->guiSystem.at("STATUS").setEntryText(2,"Regions : "+std::to_string(now.regions[0]));
+                    this->guiSystem.at("STATUS").setEntryText(3,"Population : "+std::to_string((int)now.population)+"/"+std::to_string(now.maxPopPerLevel*(now.tileVariant+1)));
+                    this->guiSystem.at("STATUS").setEntryText(4,"Stored Good : "+std::to_string((int)now.storedGoods));
+                    this->guiSystem.at("STATUS").setEntryText(5,"Production : "+std::to_string((int)now.storedGoods));
+                    this->guiSystem.at("STATUS").setPosition(pos);
+                    this->guiSystem.at("STATUS").show();
+                }
+                else
+                {
+                    this->guiSystem.at("STATUS").hide();
+                }
+
+            /* Highlight entries of the right click context menu */
+            this->guiSystem.at("rightClickMenu").highlight(this->guiSystem.at("rightClickMenu").getEntry(guiPos));
+
+            satu=this->guiSystem.at("mult1").highlight(this->guiSystem.at("mult1").getEntry(guiPos));
+            dua=this->guiSystem.at("mult2").highlight(this->guiSystem.at("mult2").getEntry(guiPos));
+            tiga=this->guiSystem.at("mult4").highlight(this->guiSystem.at("mult4").getEntry(guiPos));
+
+            break;
+            }
             case sf::Event::MouseButtonPressed:
             {
                 /* Start panning */
@@ -262,6 +341,22 @@ void GameStateEditor::handleinput()
                             selectionStart.x = pos.y / (this->city.map.tileSize) + pos.x / (2*this->city.map.tileSize) - this->city.map.width * 0.5 - 0.5;
                             selectionStart.y = pos.y / (this->city.map.tileSize) - pos.x / (2*this->city.map.tileSize) + this->city.map.width * 0.5 + 0.5;
                         }
+                    }
+
+                    if(satu==1 && dua==0 && tiga==0){
+                        mul1=true;
+                        mul2=false;
+                        mul3=false;
+                    }
+                    else if(satu==0 && dua==1 && tiga==0){
+                        mul1=false;
+                        mul2=true;
+                        mul3=false;
+                    }
+                    else if(satu==0 && dua==0 && tiga==1){
+                        mul1=false;
+                        mul2=false;
+                        mul3=true;
                     }
                 }
                 else if(event.mouseButton.button == sf::Mouse::Right)
