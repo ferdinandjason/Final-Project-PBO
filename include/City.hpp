@@ -93,6 +93,12 @@ class City
         double funds;
 
         int day;
+        int hospitalCounter=0;
+        int schoolCounter=0;
+
+        float propCanWork;
+        double birthRate;
+        double deathRate;
 
     protected:
 
@@ -104,9 +110,7 @@ class City
 
         double populationPool;
         double employmentPool;
-        float propCanWork;
-        double birthRate;
-        double deathRate;
+
 
         double distributePool(double& pool,Tile& tile,double rate);
 };

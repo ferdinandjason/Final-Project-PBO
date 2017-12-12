@@ -37,7 +37,9 @@ GameStateEditor::GameStateEditor(Game* game)
             std::make_pair("Residential Zone $" + this->game->tileAtlas["residential"].getCost(),   "residential"),
             std::make_pair("Commercial Zone $"  + this->game->tileAtlas["commercial"].getCost(),    "commercial"),
             std::make_pair("Industrial Zone $"  + this->game->tileAtlas["industrial"].getCost(),    "industrial"),
-            std::make_pair("Road $"             + this->game->tileAtlas["road"].getCost(),          "road")
+            std::make_pair("Road $"             + this->game->tileAtlas["road"].getCost(),          "road"),
+            std::make_pair("School $"           + this->game->tileAtlas["school"].getCost(),        "school"),
+            std::make_pair("Hospital $"         + this->game->tileAtlas["hospital"].getCost(),      "hospital")
         }));
 
     this->guiSystem.emplace("selectionCostText", Gui(sf::Vector2f(196, 16), 0, false, this->game->styleSheets.at("text"),
@@ -171,6 +173,8 @@ void GameStateEditor::update(const float dt)
     if(mul2==true){this->guiSystem.at("mult2").highlight(0);this->game->Accelerator=2;}
     if(mul3==true){this->guiSystem.at("mult4").highlight(0);this->game->Accelerator=4;}
 
+    //std::cout << this->city.birthRate << std::endl;
+
     return;
 }
 
@@ -253,14 +257,26 @@ void GameStateEditor::handleinput()
                     {
                         this->city.map.select(selectionStart, selectionEnd, {this->currentTile->tileType, TileType::WATER});
                     }
-                    else
+                    else if(this->currentTile->tileType != TileType::ROAD)
                     {
                         this->city.map.select(selectionStart, selectionEnd,
                             {
                                 this->currentTile->tileType,    TileType::FOREST,
                                 TileType::WATER,                TileType::ROAD,
                                 TileType::RESIDENTIAL,          TileType::COMMERCIAL,
-                                TileType::INDUSTRIAL
+                                TileType::INDUSTRIAL,           TileType::HOSPITAL,
+                                TileType::SCHOOL
+                            });
+                    }
+                    else
+                    {
+                        // ROAD CAN CROSS INTO A WATER HEHE, limit ?
+                        this->city.map.select(selectionStart,selectionEnd,
+                            {
+                                this->currentTile->tileType,    TileType::FOREST,
+                                TileType::RESIDENTIAL,          TileType::COMMERCIAL,
+                                TileType::INDUSTRIAL,           TileType::HOSPITAL,
+                                TileType::SCHOOL
                             });
                     }
                     /* Selection Cost Text */
@@ -284,12 +300,12 @@ void GameStateEditor::handleinput()
                         pos -= sf::Vector2f(0, this->guiSystem.at("STATUS").getSize().y);
                     }
 
-                    this->guiSystem.at("STATUS").setEntryText(0,tileTypeToStr(now.tileType));
-                    this->guiSystem.at("STATUS").setEntryText(1,"Level : "+std::to_string(now.tileVariant)+"/"+std::to_string(now.maxLevels));
-                    this->guiSystem.at("STATUS").setEntryText(2,"Regions : "+std::to_string(now.regions[0]));
-                    this->guiSystem.at("STATUS").setEntryText(3,"Population : "+std::to_string((int)now.population)+"/"+std::to_string(now.maxPopPerLevel*(now.tileVariant+1)));
-                    this->guiSystem.at("STATUS").setEntryText(4,"Stored Good : "+std::to_string((int)now.storedGoods));
-                    this->guiSystem.at("STATUS").setEntryText(5,"Production : "+std::to_string((int)now.storedGoods));
+                    this->guiSystem.at("STATUS").setEntryText(0,"    "+tileTypeToStr(now.tileType));
+                    this->guiSystem.at("STATUS").setEntryText(1," Level : "+std::to_string(now.tileVariant)+"/"+std::to_string(now.maxLevels));
+                    this->guiSystem.at("STATUS").setEntryText(2," Regions : "+std::to_string(now.regions[0]));
+                    this->guiSystem.at("STATUS").setEntryText(3," Population : "+std::to_string((int)now.population)+"/"+std::to_string(now.maxPopPerLevel*(now.tileVariant+1)));
+                    this->guiSystem.at("STATUS").setEntryText(4," Stored Good : "+std::to_string((int)now.storedGoods));
+                    this->guiSystem.at("STATUS").setEntryText(5," Production : "+std::to_string((int)now.storedGoods));
                     this->guiSystem.at("STATUS").setPosition(pos);
                     this->guiSystem.at("STATUS").show();
                 }
@@ -404,7 +420,20 @@ void GameStateEditor::handleinput()
                             {
                                 this->city.bulldoze(*this->currentTile);
                                 this->city.funds -= this->currentTile->cost * this->city.map.numSelected;
+                                if(this->currentTile->tileType==TileType::SCHOOL){
+                                        this->city.schoolCounter+=this->city.map.numSelected;
+                                        double tempPropCanWorkRate=this->city.propCanWork;
+                                        tempPropCanWorkRate+=(0.01)*(double)this->city.schoolCounter;
+                                        this->city.propCanWork;
+                                }
+                                if(this->currentTile->tileType==TileType::HOSPITAL){
+                                        this->city.hospitalCounter+=this->city.map.numSelected;
+                                        double tempBirthRate=this->city.birthRate;
+                                        tempBirthRate+=(0.000055)*(double)this->city.hospitalCounter;
+                                        this->city.birthRate=tempBirthRate;
+                                }
                                 this->city.tileChanged();
+
                             }
                         }
                         this->guiSystem.at("selectionCostText").hide();

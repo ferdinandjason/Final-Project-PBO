@@ -294,6 +294,16 @@ void City::bulldoze(const Tile& tile)
             {
                 this->employmentPool += this->map.tiles[pos].population;
             }
+            if(this->map.tiles[pos].tileType == TileType::SCHOOL)
+            {
+                this->schoolCounter--;
+                this->propCanWork-=0.01;
+            }
+            if(this->map.tiles[pos].tileType == TileType::HOSPITAL)
+            {
+                this->hospitalCounter--;
+                this->birthRate-=0.000055;
+            }
             this->map.tiles[pos] = tile;
         }
     }

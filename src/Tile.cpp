@@ -17,6 +17,8 @@ std::string tileTypeToStr(TileType type)
         case TileType::RESIDENTIAL:     return "Residential Zone";
         case TileType::COMMERCIAL:      return "Commercial Zone";
         case TileType::INDUSTRIAL:      return "Industrial Zone";
+        case TileType::SCHOOL:          return "School";
+        case TileType::HOSPITAL:        return "Hospital";
     }
 }
 

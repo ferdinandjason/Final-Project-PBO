@@ -84,6 +84,8 @@ void Game::loadTextures()
     texmgr.loadTexture("commercial",    "media/commercial.png");
     texmgr.loadTexture("industrial",    "media/industrial.png");
     texmgr.loadTexture("road",          "media/road.png");
+    texmgr.loadTexture("school",        "media/school.png");
+    texmgr.loadTexture("hospital",      "media/hospital.png");
 
     texmgr.loadTexture("background",    "media/background.png");
     texmgr.loadTexture("logos",         "media/logos.png");
@@ -118,8 +120,7 @@ void Game::loadTiles()
             TileType::COMMERCIAL, 300, 50, 4);
     tileAtlas["industrial"] =
         Tile(this->tileSize, 2, texmgr.getRef("industrial"),
-            { staticAnim, staticAnim, staticAnim,
-            staticAnim },
+            { staticAnim, staticAnim, staticAnim, staticAnim },
             TileType::INDUSTRIAL, 300, 50, 4);
     tileAtlas["road"] =
         Tile(this->tileSize, 1, texmgr.getRef("road"),
@@ -128,6 +129,14 @@ void Game::loadTiles()
             staticAnim, staticAnim, staticAnim,
             staticAnim, staticAnim },
             TileType::ROAD, 100, 0, 1);
+    tileAtlas["school"] =
+        Tile(this->tileSize, 2, texmgr.getRef("school"),
+            { staticAnim },
+            TileType::SCHOOL, 1000, 0, 0);
+    tileAtlas["hospital"] =
+        Tile(this->tileSize, 2, texmgr.getRef("hospital"),
+            { staticAnim },
+            TileType::HOSPITAL, 1000, 0, 0);
 
     return;
 }

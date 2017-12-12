@@ -56,6 +56,12 @@ void Map::load(const std::string& filename, unsigned int width, unsigned int hei
             case TileType::ROAD:
                 this->tiles.push_back(tileAtlas.at("road"));
                 break;
+            case TileType::SCHOOL:
+                this->tiles.push_back(tileAtlas.at("school"));
+                break;
+            case TileType::HOSPITAL:
+                this->tiles.push_back(tileAtlas.at("hospital"));
+                break;
         }
         Tile& tile = this->tiles.back();
         inputFile.read((char*)&tile.tileVariant, sizeof(int));
