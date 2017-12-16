@@ -18,6 +18,7 @@ Game::Game()
     this->window.setFramerateLimit(60);
 
     this->background.setTexture(this->texmgr.getRef("background"));
+    this->backgroundStart.setTexture(this->texmgr.getRef("backgrondStart"));
     this->logos.setTexture(this->texmgr.getRef("logos"));
 }
 
@@ -88,6 +89,7 @@ void Game::loadTextures()
     texmgr.loadTexture("hospital",      "media/hospital.png");
 
     texmgr.loadTexture("background",    "media/background.png");
+    texmgr.loadTexture("backgrondStart","media/backgroundStart.png");
     texmgr.loadTexture("logos",         "media/logos.png");
 }
 

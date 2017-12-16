@@ -97,5 +97,6 @@ void GameStatePause::handleinput()
 
 void GameStatePause::backToGame()
 {
+    this->games->backsound.play();
     this->game->popState();
 }

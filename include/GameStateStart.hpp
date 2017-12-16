@@ -2,6 +2,7 @@
 #define GAMESTATESTART_HPP
 
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 
 #include "GameState.hpp"
 
@@ -39,6 +40,8 @@ class GameStateStart : public GameState
         virtual void draw(const float dt);
         virtual void update(const float dt);
         virtual void handleinput();
+
+        sf::Music backsound;
 
     protected:
 

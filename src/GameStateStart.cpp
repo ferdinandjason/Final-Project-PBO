@@ -31,15 +31,17 @@ GameStateStart::GameStateStart(Game* game)
      *
      */
 
-    this->guiSystem.emplace("judul",Gui(sf::Vector2f(410,46),0,false,this->game->styleSheets.at("text2"),
-        {std::make_pair("City Building","judul")}));
-    pos.y+=60;
-    this->guiSystem.at("judul").setOrigin(sf::Vector2f(205,23));
+    this->guiSystem.emplace("judul",Gui(sf::Vector2f(690,50),2,false,this->game->styleSheets.at("text2"),
+        {std::make_pair("City Builder The Game","judul")}));
+    //pos.x-=145;
+    pos.y+=215;
+    this->guiSystem.at("judul").setOrigin(sf::Vector2f(345,25));
     this->guiSystem.at("judul").setPosition(pos);
     this->guiSystem.at("judul").show();
-
-    this->guiSystem.emplace("menu",Gui(sf::Vector2f(192,32),4,false,game->styleSheets.at("button"),{std::make_pair(" Load Game","load_game")}));
-    pos.y+=140;
+    pos.y-=215;
+    //pos.x+=145;
+    this->guiSystem.emplace("menu",Gui(sf::Vector2f(192,32),4,false,game->styleSheets.at("button"),{std::make_pair(" Play Game!","load_game")}));
+    pos.y+=150;
     this->guiSystem.at("menu").setPosition(pos);
     this->guiSystem.at("menu").setOrigin(96,16);
     this->guiSystem.at("menu").show();
@@ -47,6 +49,11 @@ GameStateStart::GameStateStart(Game* game)
     sf::Vector2i koor=sf::Vector2i(159,3);
     //printf("%d %d\n",koor.y,koor.x);
     this->game->logos.setPosition(this->game->window.mapPixelToCoords(koor));
+
+    this->backsound.openFromFile("music/backsoundStart.ogg");
+    this->backsound.play();
+    this->backsound.setLoop(true);
+    this->backsound.setVolume(30);
 
 }
 
@@ -60,8 +67,7 @@ void GameStateStart::draw(const float dt)
     this->game->window.setView(this->view);
 
     this->game->window.clear(sf::Color::Black);
-    this->game->window.draw(this->game->background);
-    this->game->window.draw(this->game->logos);
+    this->game->window.draw(this->game->backgroundStart);
 
     for(auto gui:this->guiSystem) this->game->window.draw(gui.second);
 
@@ -146,6 +152,7 @@ void GameStateStart::handleinput()
 
 void GameStateStart::loadGame()
 {
+    this->backsound.stop();
     this->game->pushState(new GameStateEditor(this->game));
 
     return;

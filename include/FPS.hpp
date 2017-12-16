@@ -8,7 +8,7 @@ class FPS
     public:
         FPS();
         ~FPS();
-        float getFPS(const float dt);
+        float getFPS(const float dt,int Accelerator);
 
     protected:
 

@@ -93,6 +93,10 @@ GameStateEditor::GameStateEditor(Game* game)
     this->currentTile = &this->game->tileAtlas.at("grass");
     this->actionState=ActionState::NONE;
 
+    this->backsound.openFromFile("music/backsound.ogg");
+    this->backsound.play();
+    this->backsound.setLoop(true);
+    this->backsound.setVolume(100);
 
 }
 
@@ -164,7 +168,7 @@ void GameStateEditor::update(const float dt)
     this->guiSystem.at("infoBar").setEntryText(2, " "+std::to_string(long(this->city.population)) + " (" + std::to_string(long(this->city.getHomeless())) + ")");
     this->guiSystem.at("infoBar").setEntryText(3, " "+std::to_string(long(this->city.employable)) + " (" + std::to_string(long(this->city.getUnemployed())) + ")");
     this->guiSystem.at("infoBar").setEntryText(4, " "+tileTypeToStr(currentTile->tileType));
-    this->guiSystem.at("infoBar").setEntryText(5, " FPS : "+std::to_string(frame.getFPS(dt)));
+    this->guiSystem.at("infoBar").setEntryText(5, " FPS : "+std::to_string(frame.getFPS(dt,this->game->Accelerator)));
 
     /* Highlight entries of the right click context menu */
     this->guiSystem.at("rightClickMenu").highlight(this->guiSystem.at("rightClickMenu").getEntry(this->game->window.mapPixelToCoords(sf::Mouse::getPosition(this->game->window), this->guiView)));
@@ -192,6 +196,7 @@ void GameStateEditor::handleinput()
             /* Close the window */
             case sf::Event::Closed:
             {
+                this->backsound.stop();
                 game->window.close();
                 break;
             }
@@ -223,7 +228,10 @@ void GameStateEditor::handleinput()
             case sf::Event::KeyPressed:
             {
                 if(event.key.code == sf::Keyboard::Escape) this->game->window.close();
-                else if(event.key.code == sf::Keyboard::Space) this->game->pushState(new GameStatePause(this->game,this));
+                else if(event.key.code == sf::Keyboard::Space){
+                    this->game->pushState(new GameStatePause(this->game,this));
+                    this->backsound.pause();
+                }
                 break;
             }
 
