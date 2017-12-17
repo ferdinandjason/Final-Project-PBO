@@ -14,7 +14,7 @@
  * Our game will use three states, GameStateStart, GameStateEditor and GameStatePaused
  */
 
- enum class State {START,PLAY,PAUSE};
+ enum class State {START,PLAY,PAUSE,TUTOR};
 
 class GameState
 {

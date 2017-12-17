@@ -37,7 +37,7 @@ void Game::pushState(GameState* state)
 
 void Game::popState()
 {
-    if(this->states.top()->gameStates!=State::PAUSE) delete this->states.top();
+    if(this->states.top()->gameStates!=State::PAUSE && this->states.top()->gameStates!=State::TUTOR) delete this->states.top();
     this->states.pop();
 
     return;
