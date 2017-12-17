@@ -32,24 +32,36 @@ GameStateStart::GameStateStart(Game* game)
      *
      */
 
-    this->guiSystem.emplace("judul",Gui(sf::Vector2f(690,50),2,false,this->game->styleSheets.at("text2"),
+    this->guiSystem.emplace("judul",Gui(sf::Vector2f(690,50),2,false,this->game->styleSheets.at("text3"),
         {std::make_pair("City Builder The Game","judul")}));
     //pos.x-=145;
-    pos.y+=215;
+    pos.y-=250;
     this->guiSystem.at("judul").setOrigin(sf::Vector2f(345,25));
     this->guiSystem.at("judul").setPosition(pos);
     this->guiSystem.at("judul").show();
-    pos.y-=215;
+    pos.y+=250;
     //pos.x+=145;
     this->guiSystem.emplace("menu",Gui(sf::Vector2f(192,32),4,false,game->styleSheets.at("button"),{std::make_pair(" Play Game!","load_game")}));
     pos.y+=150;
     this->guiSystem.at("menu").setPosition(pos);
     this->guiSystem.at("menu").setOrigin(96,16);
-    this->guiSystem.at("menu").show();
+    //this->guiSystem.at("menu").show();
+
+
 
     sf::Vector2i koor=sf::Vector2i(159,3);
-    //printf("%d %d\n",koor.y,koor.x);
-    this->game->logos.setPosition(this->game->window.mapPixelToCoords(koor));
+
+    sf::Vector2i origin(pos);
+    int x=origin.x - this->game->play_button.getTexture()->getSize().x/2;
+    int y=origin.y - this->game->play_button.getTexture()->getSize().y/2;
+    this->game->play_button.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(x,y)));
+
+    sf::Vector2i origin2(800,600);
+    x=origin2.x - this->game->help_button.getTexture()->getSize().x;
+    y=origin2.y - this->game->help_button.getTexture()->getSize().y;
+    this->game->help_button.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(x,y)));
+
+    //this->game->logos.setPosition(this->game->window.mapPixelToCoords(koor));
 
     this->backsound.openFromFile("music/backsoundStart.ogg");
     this->backsound.play();
@@ -69,6 +81,8 @@ void GameStateStart::draw(const float dt)
 
     this->game->window.clear(sf::Color::Black);
     this->game->window.draw(this->game->backgroundStart);
+    this->game->window.draw(this->game->play_button);
+    this->game->window.draw(this->game->help_button);
 
     for(auto gui:this->guiSystem) this->game->window.draw(gui.second);
 
@@ -84,6 +98,8 @@ void GameStateStart::handleinput()
 {
     sf::Event event;
     sf::Vector2f mousePos = this->game->window.mapPixelToCoords(sf::Mouse::getPosition(this->game->window),this->view);
+    bool inPlayButton=false;
+    bool inHelpButton=false;
 
     while(this->game->window.pollEvent(event))
     {
@@ -100,26 +116,47 @@ void GameStateStart::handleinput()
             {
                 this->view.setSize(event.size.width,event.size.height);
                 /* Setiing mouse input for guiStart */
-                this->game->background.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0,0)));
+                this->game->backgroundStart.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0,0)));
                 //printf("%d %d\n",this->game->logos.getTexture()->getSize().y,this->game->logos.getTexture()->getSize().x);
-                sf::Vector2i koor=sf::Vector2i(event.size.width/2-this->game->logos.getTexture()->getSize().y/2,event.size.height/2-this->game->logos.getTexture()->getSize().x/2);
-                koor.y-=90;
-                koor.x-=50;
+                //sf::Vector2i koor=sf::Vector2i(event.size.width/2-this->game->logos.getTexture()->getSize().y/2,event.size.height/2-this->game->logos.getTexture()->getSize().x/2);
+                //koor.y-=90;
+                //koor.x-=50;
                 //printf("%d %d\n",koor.y,koor.x);
-                this->game->logos.setPosition(this->game->window.mapPixelToCoords(koor));
+                //this->game->logos.setPosition(this->game->window.mapPixelToCoords(koor));
                 sf::Vector2f pos = sf::Vector2f(event.size.width,event.size.height);
                 pos*=0.5f;
                 pos=this->game->window.mapPixelToCoords(sf::Vector2i(pos),this->view);
                 this->guiSystem.at("menu").setPosition(pos);
-                this->game->background.setScale(
-                    float(event.size.width)/float(this->game->background.getTexture()->getSize().x),
-                    float(event.size.height)/float(this->game->background.getTexture()->getSize().y));
+                this->game->backgroundStart.setScale(
+                    float(event.size.width)/float(this->game->backgroundStart.getTexture()->getSize().x),
+                    float(event.size.height)/float(this->game->backgroundStart.getTexture()->getSize().y));
                 break;
             }
             /* Highlight menu items */
             case sf::Event::MouseMoved:
             {
-                this->guiSystem.at("menu").highlight(this->guiSystem.at("menu").getEntry(mousePos));
+                //this->guiSystem.at("menu").highlight(this->guiSystem.at("menu").getEntry(mousePos));
+
+                sf::Vector2f point = mousePos;
+                point += this->game->play_button.getOrigin();
+                point -= this->game->play_button.getPosition();
+                if(point.x>=0 && point.y>=0 && point.x<=this->game->play_button.getTexture()->getSize().x && point.y<=this->game->play_button.getTexture()->getSize().y){
+                    this->game->play_button.setColor(sf::Color(0x94,0x94,0x94));
+                }
+                else{
+                    this->game->play_button.setColor(sf::Color(0xff,0xff,0xff));
+                }
+
+                point = mousePos;
+                point += this->game->help_button.getOrigin();
+                point -= this->game->help_button.getPosition();
+                if(point.x>=0 && point.y>=0 && point.x<=this->game->help_button.getTexture()->getSize().x && point.y<=this->game->help_button.getTexture()->getSize().y){
+                    this->game->help_button.setColor(sf::Color(0x94,0x94,0x94));
+                }
+                else{
+                    this->game->help_button.setColor(sf::Color(0xff,0xff,0xff));
+                }
+
                 break;
             }
             /* Click on menu items. */
@@ -127,11 +164,29 @@ void GameStateStart::handleinput()
             {
                 if(event.mouseButton.button == sf::Mouse::Left)
                 {
-                    std::string msg = this->guiSystem.at("menu").activate(mousePos);
-                    if(msg == "load_game")
+                    sf::Vector2f point = mousePos;
+                    point += this->game->play_button.getOrigin();
+                    point -= this->game->play_button.getPosition();
+                    if(point.x>=0 && point.y>=0 && point.x<=this->game->play_button.getTexture()->getSize().x && point.y<=this->game->play_button.getTexture()->getSize().y) inPlayButton=true;
+                    else inPlayButton=false;
+
+                    if(inPlayButton)
                     {
                         this->loadGame();
                     }
+
+                    point = mousePos;
+                    point += this->game->help_button.getOrigin();
+                    point -= this->game->help_button.getPosition();
+                    if(point.x>=0 && point.y>=0 && point.x<=this->game->help_button.getTexture()->getSize().x && point.y<=this->game->help_button.getTexture()->getSize().y) inHelpButton=true;
+                    else inHelpButton=false;
+
+                    if(inHelpButton)
+                    {
+                        this->instruction();
+                    }
+
+
                 }
                 break;
             }

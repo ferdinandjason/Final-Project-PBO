@@ -8,6 +8,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "Tile.hpp"
+#include "GameState.hpp"
 
 /*
  * Map Class : (Game Engine Class I)
@@ -25,7 +26,7 @@
  * clearSelected                deselect every tile
  *
  */
-
+enum class Season;
 
 class Map
 {
@@ -64,7 +65,7 @@ class Map
 
         void load(const std::string& filename,unsigned int width,unsigned int height,std::map<std::string,Tile>& tileAtlas);
         void save(const std::string& filename);
-        void draw(sf::RenderWindow& window,float dt);
+        void draw(sf::RenderWindow& window,float dt,Season season);
         void findConnectedRegions(std::vector<TileType> whitelist,int type);
         void updateDirection(TileType tileType);
         void clearSelected();

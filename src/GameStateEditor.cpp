@@ -125,10 +125,13 @@ void GameStateEditor::draw(const float dt)
     this->game->window.clear(sf::Color::Black);
 
     this->game->window.setView(this->guiView);
-    this->game->window.draw(this->game->background);
+    if(this->season==Season::SPRING) this->game->window.draw(this->game->backgrounds);
+    if(this->season==Season::SUMMER) this->game->window.draw(this->game->background);
+    if(this->season==Season::AUTUMN) this->game->window.draw(this->game->backgrounda);
+    if(this->season==Season::WINTER) this->game->window.draw(this->game->backgroundw);
 
     this->game->window.setView(this->gameView);
-    this->city.map.draw(this->game->window, dt);
+    this->city.map.draw(this->game->window, dt,this->season);
 
     this->game->window.setView(this->guiView);
     for(auto gui : this->guiSystem) this->game->window.draw(gui.second);
@@ -161,6 +164,11 @@ void GameStateEditor::draw(const float dt)
 void GameStateEditor::update(const float dt)
 {
     this->city.update(dt);
+    double musim=(double)this->city.day/365.0;
+    if(musim-floor(musim)<0.25) this->season=Season::SPRING;
+    else if(musim-floor(musim)<0.50) this->season=Season::SUMMER;
+    else if(musim-floor(musim)<0.75) this->season=Season::AUTUMN;
+    else if(musim-floor(musim)<=0.99) this->season=Season::WINTER;
 
     /* Update the info bar at the bottom of the screen */
     this->guiSystem.at("infoBar").setEntryText(0, " Day: " + std::to_string(this->city.day));
@@ -187,7 +195,6 @@ void GameStateEditor::handleinput()
     sf::Event event;
 
     sf::Vector2f guiPos = this->game->window.mapPixelToCoords(sf::Mouse::getPosition(this->game->window), this->guiView);
-    sf::Vector2f gamePos = this->game->window.mapPixelToCoords(sf::Mouse::getPosition(this->game->window), this->gameView);
 
     while(this->game->window.pollEvent(event))
     {
@@ -213,6 +220,18 @@ void GameStateEditor::handleinput()
                 this->game->background.setScale(
                     float(event.size.width)/float(this->game->background.getTexture()->getSize().x),
                     float(event.size.height)/float(this->game->background.getTexture()->getSize().y));
+                this->game->backgrounds.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0,0),this->guiView));
+                this->game->backgrounds.setScale(
+                    float(event.size.width)/float(this->game->backgrounds.getTexture()->getSize().x),
+                    float(event.size.height)/float(this->game->backgrounds.getTexture()->getSize().y));
+                this->game->backgrounda.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0,0),this->guiView));
+                this->game->backgrounda.setScale(
+                    float(event.size.width)/float(this->game->backgrounda.getTexture()->getSize().x),
+                    float(event.size.height)/float(this->game->backgrounda.getTexture()->getSize().y));
+                this->game->backgroundw.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0,0),this->guiView));
+                this->game->backgroundw.setScale(
+                    float(event.size.width)/float(this->game->backgroundw.getTexture()->getSize().x),
+                    float(event.size.height)/float(this->game->backgroundw.getTexture()->getSize().y));
                 /* Resizing Accelerator Button */
                 this->guiSystem.at("mult1").setDimensions(sf::Vector2f(48,48));
                 this->guiSystem.at("mult1").setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(event.size.width-150,2),this->guiView));
@@ -432,7 +451,6 @@ void GameStateEditor::handleinput()
                                         this->city.schoolCounter+=this->city.map.numSelected;
                                         double tempPropCanWorkRate=this->city.propCanWork;
                                         tempPropCanWorkRate+=(0.01)*(double)this->city.schoolCounter;
-                                        this->city.propCanWork;
                                 }
                                 if(this->currentTile->tileType==TileType::HOSPITAL){
                                         this->city.hospitalCounter+=this->city.map.numSelected;

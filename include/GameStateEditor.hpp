@@ -5,8 +5,6 @@
 #include <SFML/Audio.hpp>
 
 #include "GameState.hpp"
-#include "GameStateEditor.hpp"
-#include "Map.hpp"
 #include "City.hpp"
 #include "FPS.hpp"
 
@@ -34,8 +32,8 @@
  *
  */
 
- enum class ActionState {NONE,PANNING,SELECTING};
 
+enum class ActionState {NONE,PANNING,SELECTING};
 
 class GameStateEditor : public GameState
 {
@@ -70,6 +68,8 @@ class GameStateEditor : public GameState
 
         Tile* currentTile;
         FPS frame;
+
+        Season season=Season::SPRING;
 
         int satu=1,dua=0,tiga=0;
         bool mul1=true,mul2=false,mul3=false;

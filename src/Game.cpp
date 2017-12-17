@@ -17,9 +17,17 @@ Game::Game()
     this->window.create(sf::VideoMode(800,600),"City Builder");
     this->window.setFramerateLimit(60);
 
+    this->backgrounds.setTexture(this->texmgr.getRef("backgrounds"));
     this->background.setTexture(this->texmgr.getRef("background"));
-    this->backgroundStart.setTexture(this->texmgr.getRef("backgrondStart"));
-    this->logos.setTexture(this->texmgr.getRef("logos"));
+    this->backgrounda.setTexture(this->texmgr.getRef("backgrounda"));
+    this->backgroundw.setTexture(this->texmgr.getRef("backgroundw"));
+    this->backgroundStart.setTexture(this->texmgr.getRef("background2"));
+    this->play_button.setTexture(this->texmgr.getRef("play"));
+    this->help_button.setTexture(this->texmgr.getRef("help"));
+    this->tutor1.setTexture(this->texmgr.getRef("tutor1"));
+    this->tutor2.setTexture(this->texmgr.getRef("tutor2"));
+    this->next.setTexture(this->texmgr.getRef("next"));
+    this->prev.setTexture(this->texmgr.getRef("prev"));
 }
 
 Game::~Game()
@@ -88,9 +96,19 @@ void Game::loadTextures()
     texmgr.loadTexture("school",        "media/school.png");
     texmgr.loadTexture("hospital",      "media/hospital.png");
 
+    texmgr.loadTexture("backgrounds",   "media/backgrounds.png");
     texmgr.loadTexture("background",    "media/background.png");
-    texmgr.loadTexture("backgrondStart","media/backgroundStart.png");
+    texmgr.loadTexture("backgrounda",   "media/backgrounda.png");
+    texmgr.loadTexture("backgroundw",   "media/backgroundw.png");
+    texmgr.loadTexture("background2",   "media/background2.png");
     texmgr.loadTexture("logos",         "media/logos.png");
+    texmgr.loadTexture("play",          "media/play_button.png");
+    texmgr.loadTexture("help",          "media/help.png");
+
+    texmgr.loadTexture("tutor1",        "media/Tutorial1.png");
+    texmgr.loadTexture("tutor2",        "media/Tutorial2.png");
+    texmgr.loadTexture("next",          "media/next.png");
+    texmgr.loadTexture("prev",          "media/prev.png");
 }
 
 
@@ -157,6 +175,9 @@ void Game::loadSytleSheets()
     this->styleSheets["text2"] = GuiStyle(&this->fonts.at("pixel_font"), 0,
         sf::Color(0x00,0x00,0x00,0x00), sf::Color(0x00,0x00,0x00), sf::Color(0xff,0xff,0xff),
         sf::Color(0x00,0x00,0x00,0x00), sf::Color(0x00,0x00,0x00), sf::Color(0xff,0x00,0x00));
+    this->styleSheets["text3"] = GuiStyle(&this->fonts.at("pixel_font"), 0,
+        sf::Color(0x00,0x00,0x00,0x00), sf::Color(0x00,0x00,0x00), sf::Color(0x00,0x00,0x00),
+        sf::Color(0x00,0x00,0x00,0x00), sf::Color(0x00,0x00,0x00), sf::Color(0xff,0x00,0x00));
     this->styleSheets["layer"] = GuiStyle(&this->fonts.at("pixel_font"),0,
         sf::Color(0x69,0x69,0x69,0x99),sf::Color(0x69,0x69,0x69,0x99),sf::Color(0x69,0x69,0x69,0x99),
         sf::Color(0x69,0x69,0x69,0x99),sf::Color(0x69,0x69,0x69,0x99),sf::Color(0x69,0x69,0x69,0x99));
@@ -170,10 +191,10 @@ void Game::loadSytleSheets()
 void Game::loadFonts()
 {
     sf::Font font;
-    font.loadFromFile("media/font.ttf");
+    font.loadFromFile("fonts/font.ttf");
     this->fonts["main_font"] = font;
     sf::Font font2;
-    font2.loadFromFile("media/pixel.ttf");
+    font2.loadFromFile("fonts/pixel.ttf");
     this->fonts["pixel_font"] = font2;
     return;
 }

@@ -3,7 +3,7 @@
 	"Game.hpp"
 	"GameStateStart.hpp"
 
-1513443575 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/Game.hpp
+1513528299 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/Game.hpp
 	<stack>
 	<map>
 	<string>
@@ -22,7 +22,7 @@
 	<SFML/Audio.hpp>
 	"GameState.hpp"
 
-1513491624 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameState.hpp
+1513528004 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameState.hpp
 	"Game.hpp"
 
 1511595687 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/AnimationHandler.cpp
@@ -32,7 +32,7 @@
 	<SFML/Graphics.hpp>
 	<vector>
 
-1513492378 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Game.cpp
+1513528341 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Game.cpp
 	<stack>
 	<SFML/Graphics.hpp>
 	<SFML/System.hpp>
@@ -42,7 +42,7 @@
 1511518936 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameState.cpp
 	"GameState.hpp"
 
-1513446606 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateEditor.cpp
+1513529797 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateEditor.cpp
 	<map>
 	<string>
 	<iostream>
@@ -52,16 +52,14 @@
 	"Gui.hpp"
 	"Tile.hpp"
 
-1513442826 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStateEditor.hpp
+1513528040 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStateEditor.hpp
 	<SFML/Graphics.hpp>
 	<SFML/Audio.hpp>
 	"GameState.hpp"
-	"GameStateEditor.hpp"
-	"Map.hpp"
 	"City.hpp"
 	"FPS.hpp"
 
-1513492446 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateStart.cpp
+1513521487 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateStart.cpp
 	<utility>
 	"GameStateStart.hpp"
 	"GameStateEditor.hpp"
@@ -78,14 +76,15 @@
 1513089765 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Tile.cpp
 	"Tile.hpp"
 
-1511585445 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/Map.hpp
+1513527985 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/Map.hpp
 	<string>
 	<map>
 	<vector>
 	<SFML/Graphics.hpp>
 	"Tile.hpp"
+	"GameState.hpp"
 
-1513090761 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Map.cpp
+1513529578 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/Map.cpp
 	"Map.hpp"
 	"Tile.hpp"
 	<fstream>
@@ -127,9 +126,9 @@
 1513442801 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStatePause.cpp
 	"GameStatePause.hpp"
 
-1513492127 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateTutorial.cpp
+1513529686 source:/home/ferdinand/Desktop/Tugas/PBO/City Building/src/GameStateTutorial.cpp
 	"GameStateTutorial.hpp"
 
-1513492472 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStateTutorial.hpp
+1513521769 /home/ferdinand/Desktop/Tugas/PBO/City Building/include/GameStateTutorial.hpp
 	<GameState.hpp>
 

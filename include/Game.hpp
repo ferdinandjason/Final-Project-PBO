@@ -48,9 +48,17 @@ class Game
 
         sf::RenderWindow window;
         TextureManager texmgr;
+        sf::Sprite backgrounds;
         sf::Sprite background;
+        sf::Sprite backgrounda;
+        sf::Sprite backgroundw;
         sf::Sprite backgroundStart;
-        sf::Sprite logos;
+        sf::Sprite play_button;
+        sf::Sprite help_button;
+        sf::Sprite tutor1;
+        sf::Sprite tutor2;
+        sf::Sprite next;
+        sf::Sprite prev;
 
         std::map<std::string,Tile> tileAtlas;
         std::map<std::string,GuiStyle> styleSheets;

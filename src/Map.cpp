@@ -1,5 +1,6 @@
 #include "Map.hpp"
 #include "Tile.hpp"
+
 #include <fstream>
 #include <iostream>
 
@@ -24,7 +25,7 @@ void Map::load(const std::string& filename, unsigned int width, unsigned int hei
     this->width=width;
     this->height=height;
 
-    for(int pos=0;pos<this->width * this->height;pos++)
+    for(unsigned int pos=0;pos<this->width * this->height;pos++)
     {
         this->resources.push_back(255);
         this->selected.push_back(0);
@@ -124,11 +125,11 @@ void Map::save(const std::string& filename)
  *
  */
 
-void Map::draw(sf::RenderWindow& window, float dt)
+void Map::draw(sf::RenderWindow& window, float dt,Season season)
 {
-    for(int y=0;y<this->height;y++)
+    for(unsigned int y=0;y<this->height;y++)
     {
-        for(int x=0;x<this->width;x++)
+        for(unsigned int x=0;x<this->width;x++)
         {
             // Set the Position of the Tile in the 2D World
             sf::Vector2f pos;
@@ -140,6 +141,12 @@ void Map::draw(sf::RenderWindow& window, float dt)
             // Change the color if the tile is selected
             if(this->selected[y*this->width+x])
                 this->tiles[y*this->width+x].sprite.setColor(sf::Color(0x7d,0x7d,0x7d));
+            else if(this->tiles[y*this->width+x].tileType==TileType::FOREST || this->tiles[y*this->width+x].tileType==TileType::GRASS){
+                if(season==Season::SPRING) this->tiles[y*this->width+x].sprite.setColor(sf::Color(0xff,0xff,0xff));
+                if(season==Season::SUMMER) this->tiles[y*this->width+x].sprite.setColor(sf::Color(0xff,0xd2,0x7f));
+                if(season==Season::AUTUMN) this->tiles[y*this->width+x].sprite.setColor(sf::Color(0xff,0xb7,0x32));
+                if(season==Season::WINTER) this->tiles[y*this->width+x].sprite.setColor(sf::Color(0xbd,0xbd,0xbd));
+            }
             else
                 this->tiles[y*this->width+x].sprite.setColor(sf::Color(0xff,0xff,0xff));
 
@@ -163,9 +170,9 @@ void Map::findConnectedRegions(std::vector<TileType>whitelist, int type=0)
 {
     int regions = 1;
     for(auto& tile : this->tiles) tile.regions[type] = 0;
-    for(int y = 0; y < this->height; ++y)
+    for(unsigned int y = 0; y < this->height; ++y)
     {
-        for(int x = 0; x < this->width; ++x)
+        for(unsigned int x = 0; x < this->width; ++x)
         {
             bool found = false;
             for(auto type : whitelist)
@@ -198,9 +205,9 @@ void Map::findConnectedRegions(std::vector<TileType>whitelist, int type=0)
  */
 void Map::updateDirection(TileType tileType)
 {
-    for(int y=0;y<this->height;y++)
+    for(unsigned int y=0;y<this->height;y++)
     {
-        for(int x=0;x<this->width;x++)
+        for(unsigned int x=0;x<this->width;x++)
         {
             int pos = y*this->width+x;
 

@@ -20,6 +20,8 @@ class GameStateTutorial : public GameState
         sf::View view;
 
         std::map<std::string,Gui> guiSystem;
+
+        int counter=0;
 };
 
 #endif // GAMESTATETUTORIAL_HPP

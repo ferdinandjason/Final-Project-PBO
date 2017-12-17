@@ -16,6 +16,10 @@
 
  enum class State {START,PLAY,PAUSE,TUTOR};
 
+
+enum class Season {SPRING,SUMMER,AUTUMN,WINTER,NOT};
+inline Season operator++( Season& x ) { return x = (Season)(((int)(x) + 1)); }
+
 class GameState
 {
     public:
