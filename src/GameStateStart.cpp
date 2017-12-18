@@ -117,12 +117,8 @@ void GameStateStart::handleinput()
                 this->view.setSize(event.size.width,event.size.height);
                 /* Setiing mouse input for guiStart */
                 this->game->backgroundStart.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0,0)));
-                //printf("%d %d\n",this->game->logos.getTexture()->getSize().y,this->game->logos.getTexture()->getSize().x);
-                //sf::Vector2i koor=sf::Vector2i(event.size.width/2-this->game->logos.getTexture()->getSize().y/2,event.size.height/2-this->game->logos.getTexture()->getSize().x/2);
-                //koor.y-=90;
-                //koor.x-=50;
-                //printf("%d %d\n",koor.y,koor.x);
-                //this->game->logos.setPosition(this->game->window.mapPixelToCoords(koor));
+
+
                 sf::Vector2f pos = sf::Vector2f(event.size.width,event.size.height);
                 pos*=0.5f;
                 pos=this->game->window.mapPixelToCoords(sf::Vector2i(pos),this->view);
@@ -130,6 +126,12 @@ void GameStateStart::handleinput()
                 this->game->backgroundStart.setScale(
                     float(event.size.width)/float(this->game->backgroundStart.getTexture()->getSize().x),
                     float(event.size.height)/float(this->game->backgroundStart.getTexture()->getSize().y));
+
+                pos = sf::Vector2f(event.size.width,event.size.height);
+                pos.x -= this->game->help_button.getTexture()->getSize().x;
+                pos.y -= this->game->help_button.getTexture()->getSize().y;
+                this->game->help_button.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(pos.x,pos.y)));
+
                 break;
             }
             /* Highlight menu items */

@@ -98,6 +98,25 @@ GameStateEditor::GameStateEditor(Game* game)
     this->backsound.setLoop(true);
     this->backsound.setVolume(100);
 
+
+
+    this->game->background.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0,0),this->guiView));
+    this->game->background.setScale(
+        float(this->game->window.getSize().x)/float(this->game->background.getTexture()->getSize().x),
+        float(this->game->window.getSize().y)/float(this->game->background.getTexture()->getSize().y));
+    this->game->backgrounds.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0,0),this->guiView));
+    this->game->backgrounds.setScale(
+        float(this->game->window.getSize().x)/float(this->game->backgrounds.getTexture()->getSize().x),
+        float(this->game->window.getSize().y)/float(this->game->backgrounds.getTexture()->getSize().y));
+    this->game->backgrounda.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0,0),this->guiView));
+    this->game->backgrounda.setScale(
+        float(this->game->window.getSize().x)/float(this->game->backgrounda.getTexture()->getSize().x),
+        float(this->game->window.getSize().y)/float(this->game->backgrounda.getTexture()->getSize().y));
+    this->game->backgroundw.setPosition(this->game->window.mapPixelToCoords(sf::Vector2i(0,0),this->guiView));
+    this->game->backgroundw.setScale(
+        float(this->game->window.getSize().x)/float(this->game->backgroundw.getTexture()->getSize().x),
+        float(this->game->window.getSize().y)/float(this->game->backgroundw.getTexture()->getSize().y));
+
 }
 
 GameStateEditor::~GameStateEditor()
